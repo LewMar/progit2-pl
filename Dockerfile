@@ -1,14 +1,9 @@
-FROM ruby:2.5
-
-# throw errors if Gemfile has been modified since Gemfile.lock
-# RUN bundle config --global frozen 1
+FROM ruby:3.1.2
 
 WORKDIR /usr/src/app
 
-# COPY Gemfile Gemfile.lock ./
-COPY Gemfile ./
-RUN bundle install
-
 COPY . .
+
+RUN bundle install
 
 CMD ["bundle","exec","rake","book:build"]
